@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ComposeGramApp</string>
+    <string name="generic_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industries standard dummy text ever since the 1500s.</string>
 </resources>

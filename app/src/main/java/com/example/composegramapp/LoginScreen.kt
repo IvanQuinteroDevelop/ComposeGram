@@ -38,14 +38,14 @@ fun LoginScreen() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        Header(Modifier.align(Alignment.TopEnd))
+        Content(Modifier.align(Alignment.TopEnd))
         Body(Modifier.align(Alignment.Center))
         Footer(Modifier.align(Alignment.BottomCenter))
     }
 }
 
 @Composable
-fun Header(modifier: Modifier) {
+fun Content(modifier: Modifier) {
     val activity = LocalContext.current as Activity
     Icon(
         imageVector = Icons.Default.Close,
