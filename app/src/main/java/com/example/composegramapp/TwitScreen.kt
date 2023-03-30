@@ -1,6 +1,5 @@
 package com.example.composegramapp
 
-import android.icu.number.Scale
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,14 +10,14 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -94,9 +93,9 @@ fun TwitReactions() {
                     R.drawable.ic_chat),
                 contentDescription = "comment icon",
                 tint = Color.LightGray,
-                modifier = Modifier.size(16.dp).clickable {
-                    commentMarked = !commentMarked
-                }
+                modifier = Modifier
+                    .size(16.dp)
+                    .clickable { commentMarked = !commentMarked }
             )
             Text(
                 text = if (commentMarked) "2" else "1",
@@ -110,7 +109,9 @@ fun TwitReactions() {
                 painter = painterResource(id = R.drawable.ic_rt),
                 contentDescription = "rt icon",
                 tint = if (rtMarked) Color.Green else Color.LightGray,
-                modifier = Modifier.size(17.dp).clickable { rtMarked = !rtMarked }
+                modifier = Modifier
+                    .size(17.dp)
+                    .clickable { rtMarked = !rtMarked }
             )
             Text(
                 text = if (rtMarked) "2" else "1",
@@ -124,7 +125,9 @@ fun TwitReactions() {
                 painter = painterResource(id = if (likeMarked) R.drawable.ic_like_filled else R.drawable.ic_like),
                 contentDescription = "like icon",
                 tint = if (likeMarked) Color.Red else Color.LightGray,
-                modifier = Modifier.size(16.dp).clickable { likeMarked = !likeMarked }
+                modifier = Modifier
+                    .size(16.dp)
+                    .clickable { likeMarked = !likeMarked }
             )
             Text(
                 text = if (likeMarked) "2" else "1",
@@ -142,10 +145,10 @@ fun TwitImage() {
         painter = painterResource(id = R.drawable.profile),
         contentDescription = "twit image",
         modifier = Modifier
-            .clip(
-                RoundedCornerShape(18.dp)
-            )
+            .clip(RoundedCornerShape(18.dp))
             .fillMaxWidth()
+            .height(200.dp),
+        contentScale = ContentScale.Crop
     )
 }
 
@@ -175,7 +178,12 @@ fun ProfileName() {
             color = Color.White
         )
         Text(
-            text = "@IvanDev 4h",
+            text = "@IvanDev",
+            color = Color(0xFFB5B5B5),
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+        Text(
+            text = "4h",
             color = Color(0xFFB5B5B5),
             modifier = Modifier.padding(horizontal = 8.dp)
         )
