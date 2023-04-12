@@ -4,9 +4,11 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.composegramapp.login.domain.LoginUseCase
 
 class LoginViewModel : ViewModel() {
 
+    val loginUseCase = LoginUseCase()
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 
@@ -22,7 +24,7 @@ class LoginViewModel : ViewModel() {
         _isLoginEnable.value = enableLogin(email, password)
     }
 
-    fun enableLogin(email: String, password: String): Boolean =
+    private fun enableLogin(email: String, password: String): Boolean =
         Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
 
 }
