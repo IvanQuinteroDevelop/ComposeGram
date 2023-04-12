@@ -1,4 +1,4 @@
-package com.example.composegramapp.login
+package com.example.composegramapp.login.ui
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
