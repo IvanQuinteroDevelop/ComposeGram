@@ -1,10 +1,13 @@
 package com.example.composegramapp.login.ui
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.composegramapp.login.domain.LoginUseCase
+import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
@@ -18,6 +21,9 @@ class LoginViewModel : ViewModel() {
     private val _isLoginEnable = MutableLiveData<Boolean>()
     val isLoginEnable: LiveData<Boolean> = _isLoginEnable
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun onLoginChanged(email: String, password: String) {
         _email.value = email
         _password.value = password
@@ -26,5 +32,21 @@ class LoginViewModel : ViewModel() {
 
     private fun enableLogin(email: String, password: String): Boolean =
         Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
+
+    fun onLoginSelected() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            var result = loginUseCase(email.value!!, password.value!!)
+            if (result) {
+                // Navigate to next screen
+                _email.value = ""
+                _password.value = ""
+                _isLoginEnable.value = false
+                Log.i("Navigating to next screen", "...")
+                _isLoading.value = false
+                result = false
+            }
+        }
+    }
 
 }
